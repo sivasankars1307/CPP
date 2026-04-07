@@ -113,8 +113,8 @@ def cyResults(request):
 #         return render(request, 'users/gptTestForm.html', {})
 
 from django.shortcuts import render
-from google import genai
-from google.genai import types
+import google.generativeai as genai
+from google.generativeai import types
 
 def GPTTest(request):
     if request.method == "POST":
