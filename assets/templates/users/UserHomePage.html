@@ -1,0 +1,111 @@
+{% extends 'users/userbase.html' %}
+{% block contents %}
+<style>
+    .content-section {
+    padding: 5rem 0;
+    background: var(--bg-secondary);
+}
+
+.intro-text {
+    max-width: 850px;
+    margin: 0 auto 3rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: rgba(17, 24, 39, 0.85);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 255, 234, 0.08);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 255, 234, 0.18);
+    border-color: var(--accent);
+}
+
+.card h3 {
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.card p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+</style>
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <h1>AI-Based Cybersecurity Policies & Procedures</h1>
+        <p>
+            <span class="highlight">Artificial Intelligence</span> enables organizations to
+            analyze cyber threats, generate adaptive policies, and strengthen
+            digital defense mechanisms efficiently.
+        </p>
+    </div>
+</section>
+
+<!-- DATASET CONTENT -->
+<section class="content-section">
+    <div class="container">
+
+        <h2>Organizational Dataset</h2>
+        <br>
+
+        <div class="cards-grid">
+
+            <div class="card">
+                <h3>What is a Security Policy?</h3>
+                <p>
+                    A cybersecurity policy defines technical and non-technical
+                    assets an organization must protect. It establishes regulations,
+                    roles, and implementation procedures.
+                </p>
+                <p>
+                    Policies include risk registers to promote accountability and
+                    awareness of potential threats.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>What is a Cybersecurity Risk?</h3>
+                <p>
+                    Cybersecurity risk is the probability of an event that may
+                    compromise assets such as data, systems, reputation, or identity.
+                </p>
+                <p>
+                    Risks are assessed based on likelihood and impact, including
+                    latent vulnerabilities.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Why Do We Need a Security Policy?</h3>
+                <p>
+                    Security policies provide a structured framework to protect
+                    confidential data, intellectual property, and infrastructure.
+                </p>
+                <p>
+                    They reduce unauthorized access, data breaches, and operational
+                    disruptions.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

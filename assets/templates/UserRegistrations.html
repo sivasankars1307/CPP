@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+
+<section class="login-section">
+    <div class="container">
+        <div class="login-card">
+            <div class="login-header text-center">
+                <img src="https://www.shutterstock.com/image-illustration/digital-cybersecurity-concept-glowing-blue-shield-260nw-2416521313.jpg" alt="Secure Registration - Glowing Blue Shield" class="secure-icon">
+                <h2>User Registration</h2>
+                <p>Create an account to access AI-generated cybersecurity policies securely</p>
+            </div>
+
+            <form action="{% url 'UserRegisterActions' %}" method="POST">
+                {% csrf_token %}
+
+                <!-- Floating label fields -->
+                <div class="form-group">
+                    {{ form.name }}
+                    <label>{{ form.name.label }}</label>
+                    {{ form.name.errors }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.loginid }}
+                    <label>{{ form.loginid.label }}</label>
+                    {{ form.loginid.errors }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.password }}
+                    <label>{{ form.password.label }}</label>
+                    {{ form.password.errors }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.mobile }}
+                    <label>{{ form.mobile.label }}</label>
+                    {{ form.mobile.errors }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.email }}
+                    <label>{{ form.email.label }}</label>
+                    {{ form.email.errors }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.locality }}
+                    <label>{{ form.locality.label }}</label>
+                    {{ form.locality.errors }}
+                </div>
+
+                <!-- Address textarea with floating label -->
+                <div class="form-group">
+                    {{ form.address }}
+                    <label>{{ form.address.label }}</label>
+                    {{ form.address.errors }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.city }}
+                    <label>{{ form.city.label }}</label>
+                    {{ form.city.errors }}
+                </div>
+
+                <div class="form-group">
+                    {{ form.state }}
+                    <label>{{ form.state.label }}</label>
+                    {{ form.state.errors }}
+                </div>
+
+                {{ form.status }} <!-- Hidden -->
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-login">Register</button>
+                    <button type="reset" class="btn-reset">Reset</button>
+                </div>
+
+                {% if messages %}
+                    <div class="messages mt-4">
+                        {% for message in messages %}
+                            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="login-footer text-center mt-4">
+                    <p>Already have an account? <a href="{% url 'UserLoginCheck' %}">Login here</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

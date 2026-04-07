@@ -1,0 +1,410 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI-Based Cybersecurity Policies and Procedures{% endblock %}</title>
+
+    <!-- Shared Theme Styles -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --text-primary: #e0e7ff;
+            --text-secondary: #94a3b8;
+            --accent: #00ffea;
+            --border: #1e293b;
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        header {
+            background: rgba(17, 24, 39, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: auto;
+            padding: 0 1.5rem;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 6rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(0,255,234,0.15), transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 7vw, 4rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            max-width: 900px;
+            margin: 0 auto 1.2rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .hero .highlight {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+
+        .hero-icon {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--accent);
+            box-shadow: 0 0 40px rgba(0,255,234,0.5);
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: block; }
+
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: var(--bg-secondary);
+                flex-direction: column;
+                align-items: center;
+                padding-top: 3rem;
+                transition: left 0.4s ease;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+        }
+
+        /* ===== Admin Content Section ===== */
+
+.content {
+    padding: 5rem 0;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.content h2 {
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1.5rem;
+    color: var(--accent);
+}
+
+.content > p {
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* Grid layout */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+/* Grid cards */
+.grid-item {
+    background: rgba(17, 24, 39, 0.75);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.35);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Neon hover glow */
+.grid-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top, rgba(0,255,234,0.15), transparent 70%);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.grid-item:hover::before {
+    opacity: 1;
+}
+
+.grid-item:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent);
+    box-shadow: 0 12px 35px rgba(0,255,234,0.15);
+}
+
+.grid-item h3 {
+    color: var(--accent);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.grid-item p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .content {
+        padding: 3rem 1.5rem;
+    }
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 👇 This forces footer to bottom */
+.page-content {
+    flex: 1;
+    display: block;
+}
+
+.section-header {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 3rem auto;
+}
+
+.section-header h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+}
+
+.section-header .intro-text {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+
+/* ===== Content Section ===== */
+.content {
+    padding: 60px 20px;
+    background: radial-gradient(circle at top, #0b1c2d, #050b13);
+    color: #dce6f1;
+}
+
+.content h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #4fd1ff;
+}
+
+.content p {
+    max-width: 900px;
+    margin: 0 auto 40px;
+    text-align: center;
+    color: #b6c6d9;
+    line-height: 1.7;
+}
+
+/* ===== Grid Layout ===== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* ===== Cyber Cards ===== */
+.grid-item {
+    background: linear-gradient(145deg, rgba(16, 42, 67, 0.9), rgba(6, 20, 33, 0.9));
+    border-radius: 16px;
+    padding: 25px;
+    border: 1px solid rgba(79, 209, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Glow on hover */
+.grid-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(208, 213, 214, 0.15),
+        transparent
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.grid-item:hover::before {
+    opacity: 1;
+}
+
+.grid-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 25px rgba(79, 209, 255, 0.25);
+    border-color: rgba(79, 209, 255, 0.4);
+}
+
+/* ===== Card Text ===== */
+.grid-item h3 {
+    color: #4fd1ff;
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.grid-item p {
+    color: #cfd9e6;
+    line-height: 1.6;
+    text-align: left;
+}
+
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container header-inner">
+        <a href="{% url 'AdminHome' %}" class="logo">AI-Based Cybersecurity Policies and Procedures</a>
+
+        <button class="mobile-menu-btn" onclick="document.querySelector('nav ul').classList.toggle('active')">☰</button>
+
+        <nav>
+            <ul>
+                <li><a href="{% url 'AdminHome' %}">Home</a></li>
+                <li><a href="{% url 'RegisterUsersView' %}">User Details</a></li>
+                <li><a href="{% url 'index' %}">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="page-content">
+    {% block contents %}{% endblock %}
+</main>
+
+
+<footer>
+    <div class="container">
+        <p>&copy; 2026 Alex Corporation. All Rights Reserved.</p>
+    </div>
+</footer>
+
+<script>
+    document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.querySelector('nav ul').classList.remove('active');
+        });
+    });
+</script>
+
+</body>
+</html>

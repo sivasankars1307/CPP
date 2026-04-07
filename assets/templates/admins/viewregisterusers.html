@@ -1,0 +1,164 @@
+{% extends 'admins/adminbase.html' %}
+{% load static %}
+
+{% block contents %}
+
+<section class="content-section">
+    <div class="container">
+        <div class="section-header">
+    <h2>View Registered Users</h2>
+    <p class="intro-text">
+        Manage user registrations securely. Activate pending accounts or remove as needed.
+    </p>
+</div>
+
+
+        <!-- Responsive Table Wrapper -->
+        <div class="table-responsive" style="overflow-x: auto;">
+            <table class="users-table">
+                <thead>
+                    <tr>
+                        <th>S.No</th>
+                        <th>Name</th>
+                        <th>Login ID</th>
+                        <th>Mobile</th>
+                        <th>Email</th>
+                        <th>Locality</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in data %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ i.name }}</td>
+                        <td>{{ i.loginid }}</td>
+                        <td>{{ i.mobile }}</td>
+                        <td>{{ i.email }}</td>
+                        <td>{{ i.locality }}</td>
+                        <td class="status-{{ i.status }}">{{ i.status|capfirst }}</td>
+                        <td class="actions">
+                            {% if i.status == 'waiting' %}
+                                <a href="/ActivaUsers/?uid={{ i.id }}" class="action-btn activate">Activate</a>
+                            {% else %}
+                                Activated /
+                                <form method="post" action="{% url 'delete_user' %}" style="display:inline;">
+    {% csrf_token %}
+    <input type="hidden" name="uid" value="{{ i.id }}">
+    <button type="submit" class="action-btn delete"
+            onclick="return confirm('Are you sure you want to delete this user?');">
+        Delete
+    </button>
+</form>
+
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    {% if not data %}
+                    <tr>
+                        <td colspan="8" class="text-center">No registered users found.</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Dark Neon Table Styles (Add to your main styles.css or keep inline) -->
+<style>
+    .users-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: rgba(30, 41, 59, 0.6);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0, 255, 234, 0.1);
+    }
+
+    .users-table th {
+        background: rgba(0, 255, 234, 0.15);
+        color: var(--accent);
+        padding: 1rem;
+        text-align: left;
+        font-weight: 600;
+    }
+
+    .users-table td {
+        padding: 1rem;
+        border-top: 1px solid var(--border);
+        color: var(--text-secondary);
+    }
+
+    .users-table tr:hover {
+        background: rgba(0, 255, 234, 0.05);
+        box-shadow: 0 0 15px rgba(0, 255, 234, 0.2);
+    }
+
+    .status-waiting {
+        color: #ffaa00;
+        font-weight: bold;
+    }
+
+    .status-activated {
+        color: var(--accent);
+        font-weight: bold;
+    }
+
+    .actions .action-btn {
+        padding: 0.5rem 1rem;
+        margin: 0 0.5rem;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: var(--transition);
+    }
+
+    .action-btn.activate {
+        background: rgba(0, 255, 234, 0.2);
+        color: var(--accent);
+        border: 1px solid var(--accent);
+    }
+
+    .action-btn.activate:hover {
+        background: var(--accent);
+        color: #0a0e17;
+        box-shadow: 0 0 15px rgba(0, 255, 234, 0.4);
+    }
+
+    .action-btn.delete {
+        background: rgba(255, 80, 80, 0.2);
+        color: #ff6b6b;
+        border: 1px solid #ff6b6b;
+    }
+
+    .action-btn.delete:hover {
+        background: #ff6b6b;
+        color: #0a0e17;
+    }
+</style>
+
+<!-- Optional Background (same as other pages) -->
+<style>
+    .content-section {
+        position: relative;
+        background: url('https://thumbs.dreamstime.com/b/glowing-tech-circuit-lines-dark-blue-background-digital-grid-futuristic-light-pulse-center-389376521.jpg') center/cover no-repeat fixed;
+    }
+    .content-section::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(10, 14, 23, 0.85);
+        pointer-events: none;
+    }
+    .section-header, .table-responsive {
+        position: relative;
+        z-index: 1;
+    }
+</style>
+
+{% endblock %}

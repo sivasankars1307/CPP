@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: cyber-policies-procedures
+    env: python
+    buildCommand: pip install -r requirment.txt
+    startCommand: gunicorn CyberPoliciesProcedures.wsgi:application
+    envVars:
+      - key: SECRET_KEY
+        value: Z2l90GzBCB9KW1iexlBonmx5PGRp9GtJAoxcrtFruTospbzN7JLeohtIsGvj3cYqG5I

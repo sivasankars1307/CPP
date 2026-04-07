@@ -1,0 +1,23 @@
+{% extends 'users/userbase.html' %}
+{% block contents %}
+
+<section class="content-section">
+    <div class="container">
+      <br>
+        <h2>Prediction Results</h2>
+        <br>
+        <p class="intro-text">
+            Below are the AI-generated cybersecurity analysis results based on
+            the selected organizational dataset.
+        </p>
+        <br>
+        <div class="table-card">
+            <div class="table-responsive">
+                {{ rf|safe }}
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

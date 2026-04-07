@@ -1,0 +1,21 @@
+Problem Statement
+
+Organizations must follow cybersecurity standards such as NIST and ISO to protect their digital assets.
+However, writing, updating, and maintaining cybersecurity policies and procedures manually is:
+
+Time-consuming
+
+Complex and error-prone
+
+Difficult to keep updated with frequently changing standards
+
+Not tailored properly to each organization’s size, infrastructure, and risk profile
+
+Because of this, many organizations end up with outdated, incomplete, or ineffective security policies, which increases the risk of cyberattacks and non-compliance.
+
+👉 Therefore, there is a need for an automated, intelligent system that can generate accurate, up-to-date, and organization-specific cybersecurity policies efficiently.
+
+
+one line
+
+This project automates the generation of cybersecurity policies using AI, ensuring they are accurate, compliant with NIST/ISO standards, and customized to an organization’s environment.

@@ -1,0 +1,50 @@
+{% extends 'users/userbase.html' %}
+{% block contents %}
+
+<section class="content-section">
+    <div class="container">
+
+        <h2>GPT Test Console</h2>
+        <p class="intro-text">
+            Interact with the <span class="highlight">Gemini AI model</span> to generate
+            cybersecurity insights, policies, and analysis using natural language queries.
+        </p>
+
+        <div class="gpt-card">
+
+            <form method="POST" action="{% url 'GPTTest' %}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <textarea name="yourquery" required></textarea>
+                    <label>Enter Your Query</label>
+                </div>
+
+                <div class="form-group">
+                    <textarea name="API_KEY" required></textarea>
+                    <label>Enter Gemini API Key</label>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-login">Get AI Results</button>
+                </div>
+
+            </form>
+
+        </div>
+
+        <div class="info-card">
+            <h3>How to Create a Gemini API Key</h3>
+            <ol>
+                <li>Login to <b>Google AI Studio</b></li>
+                <li>Click <b>Get API Key</b></li>
+                <li>Select <b>Create API key in new project</b></li>
+                <li>Copy and paste the key above</li>
+                <li><small>Example: <code>AIzaSyAR4Le7R5Wq0R5Pckm0lB24gu_yyfE6o_0</code></small></li>
+            </ol>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

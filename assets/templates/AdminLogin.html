@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+
+<section class="login-section">
+    <div class="container">
+        <div class="login-card">
+            <div class="login-header text-center">
+                <img src="https://www.shutterstock.com/image-illustration/digital-cybersecurity-concept-glowing-blue-shield-260nw-2416521313.jpg" alt="Secure Admin Login - Glowing Blue Shield" class="secure-icon">
+                <h2>Admin Login</h2>
+                <p>Secure access to the AI-generated cybersecurity policies dashboard</p>
+            </div>
+
+            <form action="{% url 'AdminLoginCheck' %}" method="POST">
+                {% csrf_token %}
+
+                <!-- Floating label fields -->
+                <div class="form-group">
+                    <input type="text" name="loginid" required id="id_loginid" />
+                    <label for="id_loginid">Login ID</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" name="pswd" required id="id_pswd" />
+                    <label for="id_pswd">Password</label>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-login">Login</button>
+                    <button type="reset" class="btn-reset">Reset</button>
+                </div>
+
+                {% if messages %}
+                    <div class="messages mt-4">
+                        {% for message in messages %}
+                            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

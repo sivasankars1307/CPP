@@ -1,0 +1,23 @@
+{% extends 'users/userbase.html' %}
+{% block contents %}
+
+<section class="content-section">
+    <div class="container">
+      <br>
+        <h2>Organizational Dataset</h2>
+        <br>
+        <p class="intro-text">
+            Below is the dynamically loaded organizational dataset used for
+            cybersecurity policy generation and risk analysis.
+        </p>
+        <br>
+        <div class="table-card">
+            <div class="table-responsive">
+                {{ data|safe }}
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
