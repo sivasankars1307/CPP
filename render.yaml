@@ -2,5 +2,6 @@ services:
   - type: web
     name: cyber-policies-procedures
     env: python
+    pythonVersion: 3.11
     buildCommand: pip install -r requirment.txt
     startCommand: gunicorn CyberPoliciesProcedures.wsgi:application
