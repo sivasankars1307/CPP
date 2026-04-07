@@ -11,21 +11,35 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+from django.core.exceptions import ImproperlyConfigured
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load environment variables from .env in development
+dotenv_path = BASE_DIR / '.env'
+if dotenv_path.exists():
+    load_dotenv(dotenv_path)
+
+
+def get_env_variable(name: str, default=None, required=False):
+    value = os.getenv(name, default)
+    if required and not value:
+        raise ImproperlyConfigured(f"The {name} environment variable is required.")
+    return value
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'Z2l90GzBCB9KW1iexlBonmx5PGRp9GtJAoxcrtFruTospbzN7JLeohtIsGvj3cYqG5I'
+SECRET_KEY = get_env_variable('SECRET_KEY', required=True)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = get_env_variable('DEBUG', 'False').lower() in ('true', '1', 'yes')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = get_env_variable('ALLOWED_HOSTS', '*').split(',') if get_env_variable('ALLOWED_HOSTS', '*') else []
 
 
 # Application definition
