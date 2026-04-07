@@ -17,7 +17,7 @@ grpcio==1.66.1
 grpcio-status==1.62.3
 httplib2==0.22.0
 idna==3.10
-numpy==2.1.1
+numpy==1.26.4
 proto-plus==1.24.0
 protobuf==4.25.4
 pyasn1==0.6.1
@@ -39,4 +39,4 @@ python-dotenv==1.0.0
 gunicorn==21.2.0
 whitenoise==6.7.0
 PyJWT==2.8.0
-pandas==2.1.4
+pandas==2.2.0
