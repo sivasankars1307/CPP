@@ -39,3 +39,4 @@ python-dotenv==1.0.0
 gunicorn==21.2.0
 whitenoise==6.7.0
 PyJWT==2.8.0
+pandas==2.2.0
